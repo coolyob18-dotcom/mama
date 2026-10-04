@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🌸 С Днём Рождения, Мама!</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    background: #fef5f9;
+    color: #4a2c3a;
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+  }
+
+  /* Летний градиентный фон */
+  .bg-gradient {
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(circle at 15% 15%, #ffe0ec 0%, transparent 45%),
+      radial-gradient(circle at 85% 20%, #d4f1f9 0%, transparent 45%),
+      radial-gradient(circle at 50% 85%, #fff0d4 0%, transparent 50%),
+      linear-gradient(180deg, #fef5f9 0%, #f0f8ff 100%);
+    z-index: -2;
+  }
+
+  /* Плавающие цветы */
+  .flower {
+    position: fixed;
+    font-size: 28px;
+    pointer-events: none;
+    z-index: -1;
+    opacity: 0.7;
+    animation: floatUp linear infinite;
+  }
+
+  @keyframes floatUp {
+    0% {
+      transform: translateY(110vh) rotate(0deg) translateX(0);
+      opacity: 0;
+    }
+    10% { opacity: 0.8; }
+    90% { opacity: 0.8; }
+    100% {
+      transform: translateY(-10vh) rotate(360deg) translateX(80px);
+      opacity: 0;
+    }
+  }
+
+  /* Лепестки, падающие */
+  .petal {
+    position: fixed;
+    font-size: 20px;
+    pointer-events: none;
+    z-index: -1;
+    opacity: 0.6;
+    animation: petalFall linear infinite;
+  }
+
+  @keyframes petalFall {
+    0% { transform: translateY(-10vh) rotate(0); opacity: 0; }
+    10% { opacity: 0.7; }
+    100% { transform: translateY(110vh) rotate(540deg) translateX(-50px); opacity: 0; }
+  }
+
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 40px 20px 80px;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Шапка */
+  .hero { padding: 60px 20px; margin-bottom: 30px; }
+
+  .hero-emoji {
+    font-size: 80px;
+    display: block;
+    margin-bottom: 20px;
+    animation: sway 3s ease-in-out infinite;
+  }
+
+  @keyframes sway {
+    0%, 100% { transform: rotate(-5deg) scale(1); }
+    50% { transform: rotate(5deg) scale(1.05); }
+  }
+
+  .hero-title {
+    font-size: 42px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    margin-bottom: 15px;
+    background: linear-gradient(135deg, #ff85b3, #c084fc, #60a5fa);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 0 0 60px rgba(255, 133, 179, 0.3);
+  }
+
+  .hero-subtitle {
+    font-size: 22px;
+    color: #b565a7;
+    font-style: italic;
+    letter-spacing: 1px;
+  }
+
+  .age-badge {
+    display: inline-block;
+    margin-top: 30px;
+    padding: 20px 50px;
+    border: 3px solid #ff85b3;
+    border-radius: 100px;
+    background: rgba(255, 255, 255, 0.7);
+    box-shadow:
+      0 0 40px rgba(255, 133, 179, 0.3),
+      inset 0 0 20px rgba(255, 133, 179, 0.1);
+    animation: glow 3s ease-in-out infinite;
+    backdrop-filter: blur(10px);
+  }
+
+  @keyframes glow {
+    0%, 100% { box-shadow: 0 0 40px rgba(255, 133, 179, 0.3), inset 0 0 20px rgba(255, 133, 179, 0.1); }
+    50% { box-shadow: 0 0 60px rgba(255, 133, 179, 0.6), inset 0 0 30px rgba(255, 133, 179, 0.2); }
+  }
+
+  .age-number {
+    font-size: 56px;
+    font-weight: bold;
+    background: linear-gradient(135deg, #ff85b3, #c084fc);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-family: 'Courier New', monospace;
+    letter-spacing: 4px;
+  }
+
+  .age-label {
+    font-size: 14px;
+    color: #b565a7;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-top: 5px;
+  }
+
+  /* Карточки */
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px;
+    margin: 40px 0;
+  }
+
+  .card {
+    background: rgba(255, 255, 255, 0.7);
+    border: 1px solid rgba(255, 133, 179, 0.3);
+    border-radius: 15px;
+    padding: 25px 20px;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s;
+    text-align: left;
+    box-shadow: 0 4px 20px rgba(255, 133, 179, 0.1);
+  }
+
+  .card:hover {
+    transform: translateY(-5px);
+    border-color: #ff85b3;
+    box-shadow: 0 10px 30px rgba(255, 133, 179, 0.3);
+  }
+
+  .card-icon { font-size: 36px; margin-bottom: 10px; }
+  .card-title {
+    font-size: 18px;
+    background: linear-gradient(135deg, #ff85b3, #c084fc);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 8px;
+    font-weight: bold;
+  }
+  .card-text { font-size: 14px; color: #7a5568; line-height: 1.6; }
+
+  /* Письмо */
+  .letter {
+    background: rgba(255, 255, 255, 0.75);
+    border-left: 4px solid #ff85b3;
+    border-radius: 10px;
+    padding: 30px;
+    margin: 40px 0;
+    text-align: left;
+    font-size: 17px;
+    line-height: 1.8;
+    color: #4a2c3a;
+    box-shadow: 0 8px 30px rgba(255, 133, 179, 0.15);
+    backdrop-filter: blur(10px);
+  }
+
+  .letter p { margin-bottom: 15px; }
+  .letter p:last-child { margin-bottom: 0; }
+  .letter .signature {
+    margin-top: 20px;
+    text-align: right;
+    font-style: italic;
+    color: #ff5fa2;
+    font-size: 18px;
+  }
+
+  /* Летние атрибуты */
+  .season-row {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin: 30px 0;
+    font-size: 40px;
+    flex-wrap: wrap;
+  }
+
+  .season-row span {
+    animation: float 3s ease-in-out infinite;
+  }
+
+  .season-row span:nth-child(2) { animation-delay: 0.3s; }
+  .season-row span:nth-child(3) { animation-delay: 0.6s; }
+  .season-row span:nth-child(4) { animation-delay: 0.9s; }
+  .season-row span:nth-child(5) { animation-delay: 1.2s; }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0) rotate(0); }
+    50% { transform: translateY(-10px) rotate(5deg); }
+  }
+
+  /* Кнопка */
+  .btn {
+    background: linear-gradient(135deg, #ff85b3, #c084fc);
+    color: white;
+    border: none;
+    padding: 16px 36px;
+    border-radius: 50px;
+    font-size: 16px;
+    font-family: inherit;
+    font-weight: bold;
+    letter-spacing: 2px;
+    cursor: pointer;
+    box-shadow: 0 10px 30px rgba(255, 133, 179, 0.4);
+    transition: all 0.3s;
+    margin: 20px 10px;
+  }
+
+  .btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 40px rgba(255, 133, 179, 0.6);
+  }
+
+  .btn:active { transform: translateY(0); }
+
+  /* Лепестки при клике */
+  .confetti {
+    position: fixed;
+    pointer-events: none;
+    z-index: 999;
+    animation: confetti-fall 3s linear forwards;
+  }
+
+  @keyframes confetti-fall {
+    0% { transform: translateY(0) rotate(0); opacity: 1; }
+    100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+  }
+
+  .footer {
+    margin-top: 60px;
+    padding-top: 30px;
+    border-top: 1px solid rgba(255, 133, 179, 0.2);
+    color: #b565a7;
+    font-size: 14px;
+    font-style: italic;
+  }
+
+  @media (max-width: 600px) {
+    .hero-title { font-size: 30px; }
+    .hero-emoji { font-size: 60px; }
+    .age-number { font-size: 42px; }
+    .age-badge { padding: 15px 30px; }
+    .letter { padding: 20px; font-size: 15px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="bg-gradient"></div>
+
+<div class="container">
+  <div class="hero">
+    <span class="hero-emoji">🌸</span>
+    <h1 class="hero-title">С Днём Рождения!<br></h1>
+    <p class="hero-subtitle">Летнее солнце нашего дома</p>
+    <div class="age-badge">
+      <div class="age-number">36</div>
+      <div class="age-label">Лет</div>
+    </div>
+  </div>
+
+  <div class="season-row">
+    <span>🌻</span>
+    <span>🌸</span>
+    <span>☀️</span>
+    <span>🌷</span>
+    <span>🦋</span>
+  </div>
+
+  <div class="cards">
+    <div class="card">
+      <div class="card-icon">☀️</div>
+      <div class="card-title">Летний человек</div>
+      <div class="card-text">Ты родилась, когда всё цветёт и солнце светит ярче. Это о тебе как тёплая, светлая, живая.</div>
+    </div>
+    <div class="card">
+      <div class="card-icon">🌺</div>
+      <div class="card-title">36 — красивое число</div>
+      <div class="card-text">Гармония, устойчивость и красота — это ты сама.</div>
+    </div>
+    <div class="card">
+      <div class="card-icon">💖</div>
+      <div class="card-title">Сердце дома</div>
+      <div class="card-text">Ты умеешь чувствовать настроение с полуслова и находить доброе слово в нужный момент.</div>
+    </div>
+    <div class="card">
+      <div class="card-icon">🌷</div>
+      <div class="card-title">Забота и красота</div>
+      <div class="card-text">Всё, к чему ты прикасаешься, становится красивее. Дом, люди, моменты — всё расцветает рядом с тобой.</div>
+    </div>
+  </div>
+
+  <div class="letter">
+    <p>Дорогая мамочка,</p>
+    <p>36 лет. Это возраст в котором ты всё ещё молодая. У тебя ещё столько всего впереди, мечты, маленькие и большие радости.</p>
+    <p>Спасибо тебе за тепло, за уют, за каждое за каждый вкусный ужин. За то, что всегда рядом, даже когда мы все работаем.</p>
+    <p>Ты умеешь делать обычные дни в праздники —  это твоя суперсила.</p>
+    <p>Пусть в этом году у тебя будет больше времени на себя. Больше цветов, больше улыбок. Пусть всё, о чём ты мечтаешь, сбудется тихо и красиво, как летний закат.</p>
+    <p>Мы тебя очень любим. С днём рождения! 🌸</p>
+    <p class="signature">— С любовью, твоя лучшая семья</p>
+  </div>
+
+  <button class="btn" onclick="launchConfetti()">🌸 Осыпать цветами</button>
+  <button class="btn" onclick="showWish()" style="background: linear-gradient(135deg, #60a5fa, #c084fc);">💌 Пожелание на год</button>
+
+  <div class="footer">
+    <p></p>
+  </div>
+</div>
+
+<script>
+  // Плавающие цветы
+  const flowerEmojis = ['🌸', '🌷', '🌻', '🌺', '🦋', '💐'];
+  function createFlower() {
+    const f = document.createElement('div');
+    f.className = 'flower';
+    f.textContent = flowerEmojis[Math.floor(Math.random() * flowerEmojis.length)];
+    f.style.left = Math.random() * 100 + 'vw';
+    f.style.animationDuration = (10 + Math.random() * 8) + 's';
+    f.style.animationDelay = Math.random() * 5 + 's';
+    f.style.fontSize = (20 + Math.random() * 20) + 'px';
+    document.body.appendChild(f);
+    setTimeout(() => f.remove(), 22000);
+  }
+
+  setInterval(createFlower, 900);
+  for (let i = 0; i < 8; i++) createFlower();
+
+  // Лепестки, падающие сверху
+  function createPetal() {
+    const p = document.createElement('div');
+    p.className = 'petal';
+    p.textContent = '🌸';
+    p.style.left = Math.random() * 100 + 'vw';
+    p.style.animationDuration = (8 + Math.random() * 6) + 's';
+    p.style.fontSize = (14 + Math.random() * 10) + 'px';
+    document.body.appendChild(p);
+    setTimeout(() => p.remove(), 16000);
+  }
+
+  setInterval(createPetal, 1500);
+
+  // Конфетти из цветов
+  function launchConfetti() {
+    const colors = ['#ff85b3', '#ffb3d1', '#c084fc', '#60a5fa', '#ffd700', '#fff0f5'];
+    const emojis = ['🌸', '🌷', '
