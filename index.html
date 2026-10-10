@@ -345,102 +345,119 @@
     <p class="signature">— С любовью, твоя лучшая семья</p>
   </div>
 
-  <button class="btn" onclick="launchConfetti()">🌸 Осыпать цветами</button>
-  <button class="btn" onclick="showWish()" style="background: linear-gradient(135deg, #60a5fa, #c084fc);">💌 Пожелание на год</button>
-
-  <div class="footer">
-    <p></p>
+ <div style="margin-top: 40px;">
+    <button class="btn" onclick="launchConfetti()">🎉 Салют</button>
+    <button class="btn" onclick="showWish()">💌 Пожелание</button>
   </div>
 </div>
 
+<button class="gift-btn" onclick="showWish()" title="Сюрприз!">🎁</button>
+
 <script>
-  // Плавающие цветы
-  const flowerEmojis = ['🌸', '🌷', '🌻', '🌺', '🦋', '💐'];
-  function createFlower() {
-    const f = document.createElement('div');
-    f.className = 'flower';
-    f.textContent = flowerEmojis[Math.floor(Math.random() * flowerEmojis.length)];
-    f.style.left = Math.random() * 100 + 'vw';
-    f.style.animationDuration = (10 + Math.random() * 8) + 's';
-    f.style.animationDelay = Math.random() * 5 + 's';
-    f.style.fontSize = (20 + Math.random() * 20) + 'px';
-    document.body.appendChild(f);
-    setTimeout(() => f.remove(), 22000);
-  }
+// ===== Летающие лепестки и цветы =====
+const leafEmojis = ['🌸', '🌺', '🌷', '💐', '🌹', '🌻', '🌼', '💮'];
+function createLeaf() {
+  const leaf = document.createElement('div');
+  leaf.className = 'leaf';
+  leaf.textContent = leafEmojis[Math.floor(Math.random() * leafEmojis.length)];
+  leaf.style.left = Math.random() * 100 + 'vw';
+  leaf.style.animationDuration = (8 + Math.random() * 8) + 's';
+  leaf.style.animationDelay = Math.random() * 5 + 's';
+  leaf.style.fontSize = (20 + Math.random() * 20) + 'px';
+  document.body.appendChild(leaf);
+  setTimeout(() => leaf.remove(), 20000);
+}
 
-  setInterval(createFlower, 900);
-  for (let i = 0; i < 8; i++) createFlower();
+// Создаём лепестки постоянно
+setInterval(createLeaf, 800);
+for (let i = 0; i < 10; i++) createLeaf();
 
-  // Лепестки, падающие сверху
-  function createPetal() {
-    const p = document.createElement('div');
-    p.className = 'petal';
-    p.textContent = '🌸';
-    p.style.left = Math.random() * 100 + 'vw';
-    p.style.animationDuration = (8 + Math.random() * 6) + 's';
-    p.style.fontSize = (14 + Math.random() * 10) + 'px';
-    document.body.appendChild(p);
-    setTimeout(() => p.remove(), 16000);
-  }
-
-  setInterval(createPetal, 1500);
-
-  // Конфетти из цветов
-  function launchConfetti() {
-    const colors = ['#ff85b3', '#ffb3d1', '#c084fc', '#60a5fa', '#ffd700', '#fff0f5'];
-    const emojis = ['🌸', '🌷', '🌻', '🌺', '💖', '☀️', '🦋', '💐'];
-
-    for (let i = 0; i < 80; i++) {
-      setTimeout(() => {
-        const c = document.createElement('div');
-        c.className = 'confetti';
-        c.textContent = emojis[Math.floor(Math.random() * emojis.length)];
-        c.style.left = Math.random() * 100 + 'vw';
-        c.style.top = '-30px';
-        c.style.fontSize = (16 + Math.random() * 20) + 'px';
-        c.style.animationDuration = (2 + Math.random() * 2) + 's';
-        document.body.appendChild(c);
-        setTimeout(() => c.remove(), 4500);
-      }, i * 20);
-    }
-  }
-
-  /* ============================================================
-     ПОЖЕЛАНИЯ НА ГОД
-     ============================================================ */
-  const wishes = [
-    "Пусть каждый день приносит маленькую радость 🌸",
-    "Пусть здоровье будет крепким, как летнее солнце ☀️",
-    "Пусть в доме всегда будет тепло и уют 🏡",
-    "Пусть работа приносит удовольствие, а отдых — восстановление ⚡",
-    "Пусть мечты сбываются так же красиво, как летний закат 🌅",
-    "Пусть рядом всегда будут те, кто тебя любит ❤️",
-    "Пусть этот год станет годом новых побед 🏆",
-    "Пусть каждый день будет поводом улыбнуться 😊",
-    "Пусть цветы цветут, а сердце поёт 🌷",
-    "Пусть все близкие будут рядом, а печали — далеко 💖",
-    "Пусть в этом году сбудется то, о чём давно мечтала ✨",
-    "Пусть каждый день будет как маленький праздник 🎉"
-  ];
-
-  function showWish() {
-    const w = wishes[Math.floor(Math.random() * wishes.length)];
-
-    // Удаляем старый toast, если он ещё висит
-    const old = document.querySelector('.toast');
-    if (old) old.remove();
-
-    const toast = document.createElement('div');
-    toast.className = 'toast';
-    toast.textContent = w;
-    document.body.appendChild(toast);
-
+// ===== Конфетти =====
+function launchConfetti() {
+  const colors = ['#ff9edb', '#c471ed', '#ffb6e1', '#e0a8ff', '#ff6ec7', '#f5e6ff'];
+  for (let i = 0; i < 80; i++) {
     setTimeout(() => {
-      toast.style.transition = 'opacity 0.5s';
-      toast.style.opacity = '0';
-      setTimeout(() => toast.remove(), 500);
-    }, 3500);
+      const c = document.createElement('div');
+      c.className = 'confetti';
+      c.style.left = Math.random() * 100 + 'vw';
+      c.style.top = '-10px';
+      c.style.background = colors[Math.floor(Math.random() * colors.length)];
+      c.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+      c.style.width = (6 + Math.random() * 10) + 'px';
+      c.style.height = (6 + Math.random() * 10) + 'px';
+      c.style.animationDuration = (2 + Math.random() * 2) + 's';
+      document.body.appendChild(c);
+      setTimeout(() => c.remove(), 4000);
+    }, i * 20);
   }
+}
+
+// ===== Пожелания на год =====
+const wishes = [
+  "Пусть каждый день приносит маленькую радость 🌸",
+  "Пусть здоровье будет крепким, а настроение — солнечным ☀️",
+  "Пусть в доме всегда будет тепло, уют и аромат цветов 🏡",
+  "Пусть работа приносит удовольствие, а отдых — вдохновение ⚡",
+  "Пусть мечты сбываются так же красиво, как летний сад 🌷",
+  "Пусть рядом всегда будут те, кто тебя любит ❤️",
+  "Пусть этот год станет годом новых побед и открытий 🏆",
+  "Пусть каждый день будет поводом улыбнуться 😊",
+  "Пусть твоя красота сияет ярче летнего солнца 🌻",
+  "Пусть удача идёт с тобой рука об руку 🍀",
+  "Пусть все тревоги тают, как утренний туман 🌫️",
+  "Пусть жизнь балует тебя приятными сюрпризами 🎁"
+];
+
+let lastWishIndex = -1;
+function showWish() {
+  let idx;
+  do {
+    idx = Math.floor(Math.random() * wishes.length);
+  } while (idx === lastWishIndex && wishes.length > 1);
+  lastWishIndex = idx;
+
+  const toast = document.createElement('div');
+  toast.textContent = wishes[idx];
+  toast.style.cssText = `
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(135deg, #ff9edb, #c471ed);
+    color: #1a0f2e;
+    font-weight: bold;
+    padding: 20px 30px;
+    border-radius: 15px;
+    font-size: 17px;
+    box-shadow: 0 10px 40px rgba(196, 113, 237, 0.6);
+    z-index: 1000;
+    max-width: 90vw;
+    text-align: center;
+    font-family: Georgia, serif;
+    animation: slideUp 0.4s ease-out;
+  `;
+  document.body.appendChild(toast);
+  setTimeout(() => {
+    toast.style.transition = 'opacity 0.5s';
+    toast.style.opacity = '0';
+    setTimeout(() => toast.remove(), 500);
+  }, 3500);
+}
+
+// Анимация slideUp
+const style = document.createElement('style');
+style.textContent = `
+  @keyframes slideUp {
+    from { opacity: 0; transform: translate(-50%, 40px); }
+    to { opacity: 1; transform: translate(-50%, 0); }
+  }
+`;
+document.head.appendChild(style);
+
+// Приветственный салют
+window.addEventListener('load', () => {
+  setTimeout(() => launchConfetti(), 800);
+});
 </script>
 
 </body>
