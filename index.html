@@ -388,4 +388,60 @@
   // Конфетти из цветов
   function launchConfetti() {
     const colors = ['#ff85b3', '#ffb3d1', '#c084fc', '#60a5fa', '#ffd700', '#fff0f5'];
-    const emojis = ['🌸', '🌷', '
+    const emojis = ['🌸', '🌷', '🌻', '🌺', '💖', '☀️', '🦋', '💐'];
+
+    for (let i = 0; i < 80; i++) {
+      setTimeout(() => {
+        const c = document.createElement('div');
+        c.className = 'confetti';
+        c.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+        c.style.left = Math.random() * 100 + 'vw';
+        c.style.top = '-30px';
+        c.style.fontSize = (16 + Math.random() * 20) + 'px';
+        c.style.animationDuration = (2 + Math.random() * 2) + 's';
+        document.body.appendChild(c);
+        setTimeout(() => c.remove(), 4500);
+      }, i * 20);
+    }
+  }
+
+  /* ============================================================
+     ПОЖЕЛАНИЯ НА ГОД
+     ============================================================ */
+  const wishes = [
+    "Пусть каждый день приносит маленькую радость 🌸",
+    "Пусть здоровье будет крепким, как летнее солнце ☀️",
+    "Пусть в доме всегда будет тепло и уют 🏡",
+    "Пусть работа приносит удовольствие, а отдых — восстановление ⚡",
+    "Пусть мечты сбываются так же красиво, как летний закат 🌅",
+    "Пусть рядом всегда будут те, кто тебя любит ❤️",
+    "Пусть этот год станет годом новых побед 🏆",
+    "Пусть каждый день будет поводом улыбнуться 😊",
+    "Пусть цветы цветут, а сердце поёт 🌷",
+    "Пусть все близкие будут рядом, а печали — далеко 💖",
+    "Пусть в этом году сбудется то, о чём давно мечтала ✨",
+    "Пусть каждый день будет как маленький праздник 🎉"
+  ];
+
+  function showWish() {
+    const w = wishes[Math.floor(Math.random() * wishes.length)];
+
+    // Удаляем старый toast, если он ещё висит
+    const old = document.querySelector('.toast');
+    if (old) old.remove();
+
+    const toast = document.createElement('div');
+    toast.className = 'toast';
+    toast.textContent = w;
+    document.body.appendChild(toast);
+
+    setTimeout(() => {
+      toast.style.transition = 'opacity 0.5s';
+      toast.style.opacity = '0';
+      setTimeout(() => toast.remove(), 500);
+    }, 3500);
+  }
+</script>
+
+</body>
+</html>
